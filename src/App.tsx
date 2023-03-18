@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './App.css';
-import { Button, Input, SelectInput } from './components/atoms';
+import { Button, Input, SelectInput, Text } from './components/atoms';
 const options = [
 	{ label: 'Option 1', value: 1 },
 	{ label: 'Option 2', value: 2 },
@@ -14,6 +14,7 @@ function App() {
 	};
 	return (
 		<div>
+			<Text text=" esto es un text" />
 			<Button text="button" />
 			<Input />
 			<SelectInput
