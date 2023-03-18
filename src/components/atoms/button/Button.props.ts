@@ -1,4 +1,3 @@
-type Color = 'primary' | ' secondary';
 import { ButtonProps as ButtonMuiProps } from '@mui/material';
 
 export interface ButtonProps extends ButtonMuiProps {

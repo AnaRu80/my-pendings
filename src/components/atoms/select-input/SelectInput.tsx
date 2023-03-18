@@ -1,25 +1,22 @@
 import React from 'react';
+import { FormControl, InputLabel, MenuItem, Select } from '@mui/material';
 
-import {
-	FormControl,
-	InputLabel,
-	MenuItem,
-	Select,
-	SelectProps,
-} from '@mui/material';
-import SelectStyles from './SelectInput.styles';
 import SelectInputStyles from './SelectInput.styles';
 import { SelectInputProps } from './SelectInput.props';
+
 export function SelectInput(props: SelectInputProps) {
-	const { sx, variant = 'outlined', label, options, value, onChange } = props;
+	const { sx, label, options, value, onChange } = props;
 	const sxStyles = [
-		...(Array.isArray(SelectStyles) ? SelectStyles : [SelectStyles]),
+		...(Array.isArray(SelectInputStyles)
+			? SelectInputStyles
+			: [SelectInputStyles]),
 		sx,
 	];
 	return (
 		<FormControl variant="outlined" fullWidth>
 			<InputLabel id={`${label}-label`}>{label}</InputLabel>
 			<Select
+				sx={sxStyles}
 				labelId={`${label}-label`}
 				id={label}
 				value={value}
