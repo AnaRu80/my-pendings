@@ -11,7 +11,7 @@ export function Button(props: ButtonProps) {
 		sx,
 	];
 	return (
-		<ButtonMui color={color} variant={variant} sx={sxStyles}>
+		<ButtonMui {...props} color={color} variant={variant} sx={sxStyles}>
 			{text}
 		</ButtonMui>
 	);

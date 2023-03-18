@@ -31,7 +31,7 @@ export function Modal(props: ModalProps) {
 					/>
 				)}
 				{mainButtonText && (
-					<Button onClick={mainFunction} text={mainButtonText} />
+					<Button onClick={mainFunction} type="submit" text={mainButtonText} />
 				)}
 			</DialogActions>
 		</Dialog>

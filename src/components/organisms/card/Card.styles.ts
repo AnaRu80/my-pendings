@@ -1,26 +1,28 @@
 import { SxProps } from '@mui/material';
 
 const CardStyles: SxProps = {
-	maxWidth: 345,
+	maxWidth: 300,
+	minWidth: 300,
+	height: 300,
 	'.simple-card': {
-		height: 400,
+		height: '100%',
 		'.icon': {
-			fontSize: 345,
+			fontSize: 300,
 		},
 	},
 	'.high': {
 		backgroundColor: 'red',
-		height: 140,
+		height: 100,
 	},
 
 	'.medium': {
 		backgroundColor: 'yellow',
-		height: 140,
+		height: 100,
 	},
 
 	'.low': {
 		backgroundColor: 'blue',
-		height: 140,
+		height: 100,
 	},
 };
 
