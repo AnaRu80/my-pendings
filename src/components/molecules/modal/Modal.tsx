@@ -19,7 +19,7 @@ export function Modal(props: ModalProps) {
 	} = props;
 
 	return (
-		<Dialog open={open} onClose={() => console.log('hola')}>
+		<Dialog open={open}>
 			<DialogTitle>{title}</DialogTitle>
 			<DialogContent>{children}</DialogContent>
 			<DialogActions>

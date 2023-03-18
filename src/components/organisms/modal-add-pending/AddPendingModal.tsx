@@ -1,70 +1,24 @@
 import React, { useState } from 'react';
 import { TypedUseSelectorHook, useSelector } from 'react-redux';
-import { Button, Input, SelectInput, Text } from '../../atoms';
+import { useDispatch } from 'react-redux';
+
+import { Input, SelectInput, Text } from '../../atoms';
 import { Modal } from '../../molecules';
-import { PRIORITY, STATUS } from '../card/Card.props';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import { pendingActions } from '../../../store/pending-slice';
-import { useDispatch } from 'react-redux';
 import { RootState } from '../../../store';
-interface PrioritySelect {
-	label: string;
-	value: string;
-}
-const priorities: PrioritySelect[] = [
-	{ label: 'high', value: 'high' },
-	{ label: 'medium', value: 'medium' },
-	{ label: 'low', value: 'low' },
-];
-interface StatusSelect {
-	label: STATUS;
-	value: string;
-}
-const status: StatusSelect[] = [
-	{ label: 'done', value: 'done' },
-	{ label: 'active', value: 'active' },
-	{ label: 'deleted', value: 'deleted' },
-];
+import {
+	status,
+	priorities,
+	propsModal,
+	IFormInput,
+} from './AddPendingModal.props';
+import { useAddPendingModal } from './AddPendingModal.hook';
 
-interface IFormInput {
-	description: string;
-	priority: {} | { label: PRIORITY; value: string };
-	status: {} | { label: STATUS; value: string };
-}
-interface propsModal {
-	isModalOpen: boolean;
-	onClose: () => void;
-}
 export function AddPendingModal(props: propsModal) {
 	const { isModalOpen, onClose } = props;
-	const {
-		control,
-		handleSubmit,
-		reset,
-		formState: { errors },
-	} = useForm({
-		defaultValues: {
-			description: '',
-			priority: '',
-			status: '',
-		},
-	});
-
-	const dispatch = useDispatch();
-	const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
-	const list = useAppSelector((state): any => state.pending.pendingsList);
-	const onSubmit: SubmitHandler<IFormInput> = data => {
-		dispatch(
-			pendingActions.addToPendings({
-				id: list.length + 1,
-				priority: data.priority,
-				description: data.description,
-				status: data.status,
-			})
-		);
-		reset();
-		onClose();
-	};
+	const { onSubmit, handleSubmit, control, errors } =
+		useAddPendingModal(onClose);
 
 	return (
 		<Modal
