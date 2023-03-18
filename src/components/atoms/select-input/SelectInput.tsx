@@ -17,6 +17,7 @@ export function SelectInput(props: SelectInputProps) {
 			<FormControl variant="outlined" fullWidth>
 				<InputLabel id={`${label}-label`}>{label}</InputLabel>
 				<Select
+					{...props}
 					sx={sxStyles}
 					labelId={`${label}-label`}
 					id={label}

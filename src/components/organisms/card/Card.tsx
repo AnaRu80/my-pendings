@@ -4,25 +4,12 @@ import { Button } from '../../atoms/button/Button';
 import { Text } from '../../atoms';
 import { CardProps } from './Card.props';
 import CardStyles from './Card.styles';
-import AddIcon from '@mui/icons-material/Add';
-import { pendingActions } from '../../../store/pending-slice';
-import { useDispatch } from 'react-redux';
 
-export default function Card(props: CardProps) {
+export function Card(props: CardProps) {
 	const { description, priority = 'high', time } = props;
-	const dispatch = useDispatch();
-	const addPending = () => {
-		dispatch(
-			pendingActions.addToPendings({
-				id: 1,
-				priority: 'high',
-				description: '11',
-				status: 'done',
-			})
-		);
-	};
+
 	return (
-		<Box sx={{ flexDirection: 'row', flex: 1, display: 'flex' }}>
+		<Box sx={{ margin: 1 }}>
 			<CardMui sx={CardStyles}>
 				<Box className={priority} />
 				<CardContent>
@@ -34,12 +21,6 @@ export default function Card(props: CardProps) {
 					<Button size="small" text="Delete" color="error" />
 					<Button size="small" text="Done" color="success" />
 				</CardActions>
-			</CardMui>
-
-			<CardMui sx={CardStyles} onClick={addPending}>
-				<Box className="simple-card">
-					<AddIcon className="icon" />
-				</Box>
 			</CardMui>
 		</Box>
 	);
