@@ -19,7 +19,6 @@ const pendingsSlice = createSlice({
 		addToPendings(state, action) {
 			const newPendings = action.payload;
 			const status: STATUS = action.payload.status;
-			console.log('new', newPendings);
 			const existingPendingId = state.pendingsList.find(
 				pending => pending.id === newPendings.id
 			);
