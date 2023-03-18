@@ -1,24 +1,16 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { CardProps } from '../components/organisms/card/Card.props';
+import { CardProps, STATUS } from '../components/organisms/card/Card.props';
 
 export interface PendingListProps extends CardProps {}
 interface PendingsInterface {
 	pendingsList: PendingListProps[];
 	totalDone: number;
-	totalDeleted: number;
+	totalActive: number;
 }
 const initialState: PendingsInterface = {
-	pendingsList: [
-		{
-			id: 0,
-			priority: 'high',
-			description: 'des1',
-			status: 'done',
-			time: 'time',
-		},
-	],
+	pendingsList: [],
 	totalDone: 0,
-	totalDeleted: 0,
+	totalActive: 0,
 };
 const pendingsSlice = createSlice({
 	name: 'pendings',
@@ -26,25 +18,30 @@ const pendingsSlice = createSlice({
 	reducers: {
 		addToPendings(state, action) {
 			const newPendings = action.payload;
+			const status: STATUS = action.payload.status;
 			console.log('new', newPendings);
-			const existingPending = state.pendingsList.find(
+			const existingPendingId = state.pendingsList.find(
 				pending => pending.id === newPendings.id
 			);
 			const existingPendingDescription = state.pendingsList.find(
 				pending => pending.description === newPendings.description
 			);
-			// if (!existingPending && !existingPendingDescription) {
-			state.pendingsList.push({
-				id: newPendings.id,
-				priority: newPendings.priority,
-				description: newPendings.description,
-				status: newPendings.status,
-				time: 'time',
-			});
-			// }
+			const existingPending = !existingPendingId && !existingPendingDescription;
+			if (existingPending && status === 'active') {
+				state.pendingsList.push({
+					id: newPendings.id,
+					priority: newPendings.priority,
+					description: newPendings.description,
+					status: newPendings.status,
+					time: 'time',
+				});
+			}
+			if (existingPending && status === 'done') {
+				state.totalDone++;
+			}
 		},
 		deleteFromPendings(state: PendingsInterface, action) {
-			const id = action.payload;
+			const id = action.payload.id;
 			const existingPending = state.pendingsList.find(
 				pending => pending.id === id
 			);
@@ -53,10 +50,9 @@ const pendingsSlice = createSlice({
 					pending => pending.id !== id
 				);
 			}
-			state.totalDeleted++;
 		},
 		doneFromPendings(state, action) {
-			const id = action.payload;
+			const id = action.payload.id;
 			const existingPending = state.pendingsList.find(
 				pending => pending.id === id
 			);
