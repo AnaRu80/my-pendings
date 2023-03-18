@@ -32,7 +32,7 @@ function App() {
 				open={false}
 				title="New Pending"
 				mainButtonText="ok"
-				mainFunction={() => console.log('ok')}>
+				mainFunction={() => console.log('okk')}>
 				<SelectInput label="Priority" options={options} />
 
 				<Input
