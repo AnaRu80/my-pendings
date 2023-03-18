@@ -1,7 +1,5 @@
 import { SxProps } from '@mui/material';
 
-const InputStyles: SxProps = {
-	backgroundColor: 'white',
-};
+const InputStyles: SxProps = {};
 
 export default InputStyles;
