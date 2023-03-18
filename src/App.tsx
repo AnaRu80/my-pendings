@@ -4,6 +4,9 @@ import { Button, Input, SelectInput, Text } from './components/atoms';
 import { Modal } from './components/molecules';
 import Card from './components/organisms/card/Card';
 import moment from 'moment';
+import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
+
+import type { RootState, AppDispatch } from './store';
 
 const options = [
 	{ label: 'Option 1', value: 1 },
@@ -13,6 +16,9 @@ const options = [
 
 function App() {
 	const [selectedValue, setSelectedValue] = useState('');
+	const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
+
+	const list = useAppSelector((state): any => state.pending.pendingsList);
 
 	const handleChange = (event: any) => {
 		setSelectedValue(event.target.value);
@@ -20,7 +26,7 @@ function App() {
 
 	return (
 		<div>
-			<Text text=" esto es un text" />
+			<Text text={JSON.stringify(list)} />
 			<Button text="button" />
 			<Input />
 			<Card
