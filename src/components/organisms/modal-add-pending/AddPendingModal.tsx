@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
+import { TypedUseSelectorHook, useSelector } from 'react-redux';
 import { Button, Input, SelectInput, Text } from '../../atoms';
 import { Modal } from '../../molecules';
 import { PRIORITY, STATUS } from '../card/Card.props';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import { pendingActions } from '../../../store/pending-slice';
 import { useDispatch } from 'react-redux';
+import { RootState } from '../../../store';
 interface PrioritySelect {
 	label: string;
 	value: string;
@@ -20,7 +22,7 @@ interface StatusSelect {
 }
 const status: StatusSelect[] = [
 	{ label: 'done', value: 'done' },
-	{ label: 'pending', value: 'pending' },
+	{ label: 'active', value: 'active' },
 	{ label: 'deleted', value: 'deleted' },
 ];
 
@@ -49,17 +51,19 @@ export function AddPendingModal(props: propsModal) {
 	});
 
 	const dispatch = useDispatch();
+	const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
+	const list = useAppSelector((state): any => state.pending.pendingsList);
 	const onSubmit: SubmitHandler<IFormInput> = data => {
-		console.log('data', data);
 		dispatch(
 			pendingActions.addToPendings({
-				id: 1,
+				id: list.length + 1,
 				priority: data.priority,
 				description: data.description,
 				status: data.status,
 			})
 		);
 		reset();
+		onClose();
 	};
 
 	return (

@@ -16,7 +16,7 @@ const CardStyles: SxProps = {
 	},
 
 	'.medium': {
-		backgroundColor: 'yellow',
+		backgroundColor: '#43ED3F',
 		height: 100,
 	},
 
