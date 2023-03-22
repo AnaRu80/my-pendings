@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/my-pendings/static/css/main.46f3c928.css",
+    "main.js": "/my-pendings/static/js/main.6f8f8289.js",
+    "static/js/787.69ee033e.chunk.js": "/my-pendings/static/js/787.69ee033e.chunk.js",
+    "index.html": "/my-pendings/index.html",
+    "main.46f3c928.css.map": "/my-pendings/static/css/main.46f3c928.css.map",
+    "main.6f8f8289.js.map": "/my-pendings/static/js/main.6f8f8289.js.map",
+    "787.69ee033e.chunk.js.map": "/my-pendings/static/js/787.69ee033e.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.46f3c928.css",
+    "static/js/main.6f8f8289.js"
+  ]
+}
