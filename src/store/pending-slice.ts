@@ -8,7 +8,29 @@ interface PendingsInterface {
 	totalActive: number;
 }
 const initialState: PendingsInterface = {
-	pendingsList: [],
+	pendingsList: [
+		{
+			id: '0',
+			description: 'des1',
+			status: 'active',
+			priority: 'high',
+			time: 'time',
+		},
+		{
+			id: '1',
+			description: 'des2',
+			status: 'active',
+			priority: 'high',
+			time: 'time',
+		},
+		{
+			id: '2',
+			description: 'des3',
+			status: 'active',
+			priority: 'high',
+			time: 'time',
+		},
+	],
 	totalDone: 0,
 	totalActive: 0,
 };
