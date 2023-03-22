@@ -6,6 +6,7 @@ import { CardProps } from './Card.props';
 import CardStyles from './Card.styles';
 import { useDispatch } from 'react-redux';
 import { pendingActions } from '../../../store/pending-slice';
+import moment from 'moment';
 
 export function Card(props: CardProps) {
 	const { id, description, priority = 'high', time } = props;
@@ -23,16 +24,24 @@ export function Card(props: CardProps) {
 				id: id,
 			})
 		);
+
+	let tomorrow = moment().add(1, 'days').format('D MMMM YYYY');
+
+	const cardStyle =
+		time <= tomorrow
+			? { backgroundColor: '#FFD6D6' }
+			: { backgroundColor: '#FFFFFF' };
+
 	return (
 		<Box sx={{ margin: 1 }}>
-			<CardMui sx={CardStyles}>
+			<CardMui sx={[CardStyles, cardStyle]}>
 				<Box className={priority} />
-				<CardContent>
+				<CardContent sx={cardStyle}>
 					<Text gutterBottom variant="h5" text={priority.toLocaleUpperCase()} />
 					<Text variant="h6" color="text.secondary" text={description} />
 					<Text variant="caption" color="text.secondary" text={time} />
 				</CardContent>
-				<CardActions>
+				<CardActions sx={cardStyle}>
 					<Button
 						size="small"
 						text="Delete"

@@ -1,6 +1,5 @@
 import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
-import moment from 'moment';
 import { Card } from '..';
 import { PendingListProps } from '../../../store/pending-slice';
 
@@ -22,7 +21,7 @@ export function SortableItem(props: PendingListProps) {
 				description={description}
 				priority={priority}
 				status={status}
-				time={moment().format('MMMM Do YYYY, h:mm:ss a')}
+				time={time}
 			/>{' '}
 		</div>
 	);

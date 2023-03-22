@@ -11,24 +11,24 @@ const initialState: PendingsInterface = {
 	pendingsList: [
 		{
 			id: '0',
-			description: 'des1',
+			description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit',
 			status: 'active',
 			priority: 'high',
-			time: 'time',
+			time: '21 March 2023',
 		},
 		{
 			id: '1',
-			description: 'des2',
+			description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit',
 			status: 'active',
-			priority: 'high',
-			time: 'time',
+			priority: 'medium',
+			time: '23 March 2023',
 		},
 		{
 			id: '2',
-			description: 'des3',
+			description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit',
 			status: 'active',
-			priority: 'high',
-			time: 'time',
+			priority: 'low',
+			time: '22 March 2023',
 		},
 	],
 	totalDone: 0,
@@ -54,7 +54,7 @@ const pendingsSlice = createSlice({
 					priority: newPendings.priority,
 					description: newPendings.description,
 					status: newPendings.status,
-					time: 'time',
+					time: newPendings.time,
 				});
 			}
 			if (existingPending && status === 'done') {

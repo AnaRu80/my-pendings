@@ -4,6 +4,7 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import { pendingActions } from '../../../store/pending-slice';
 import { RootState } from '../../../store';
 import { IFormInput } from './AddPendingModal.props';
+import moment from 'moment';
 
 export const useAddPendingModal = (onClose: any) => {
 	const {
@@ -16,6 +17,7 @@ export const useAddPendingModal = (onClose: any) => {
 			description: '',
 			priority: '',
 			status: '',
+			datePicker: new Date(),
 		},
 	});
 
@@ -30,6 +32,7 @@ export const useAddPendingModal = (onClose: any) => {
 				priority: data.priority,
 				description: data.description,
 				status: data.status,
+				time: moment(data.datePicker).format('D MMMM YYYY'),
 			})
 		);
 		reset();

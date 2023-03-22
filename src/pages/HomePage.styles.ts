@@ -5,6 +5,9 @@ const HomePageStyles: SxProps = {
 	height: '90vh',
 	display: 'flex',
 	flexDirection: 'column',
+	'.margin-button': {
+		margin: 5,
+	},
 };
 
 export default HomePageStyles;

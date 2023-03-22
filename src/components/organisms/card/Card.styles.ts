@@ -1,6 +1,6 @@
 import { SxProps } from '@mui/material';
 
-const CardStyles: SxProps = {
+const CardStyles = {
 	maxWidth: 300,
 	minWidth: 300,
 	height: 300,

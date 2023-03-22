@@ -1,5 +1,5 @@
 import React, { useState, useMemo } from 'react';
-import { Text } from '../components/atoms';
+import { Button, Text } from '../components/atoms';
 import { TypedUseSelectorHook, useSelector } from 'react-redux';
 import type { RootState } from '../store';
 
@@ -52,8 +52,26 @@ export default function HomePage() {
 		}
 	}
 
+	function handleSortDueDate() {
+		const pendingsSort = pendings
+			.slice()
+			.sort((pending1: any, pending2: any) => {
+				return pending1.time > pending2.time
+					? 1
+					: pending1.time < pending2.time
+					? -1
+					: 0;
+			});
+		setPendings(pendingsSort);
+	}
+
 	return (
 		<Box sx={HomePageStyles}>
+			<Button
+				text="Sort by Due Date"
+				onClick={handleSortDueDate}
+				className="margin-button"
+			/>
 			<DndContext
 				sensors={sensors}
 				collisionDetection={closestCenter}
