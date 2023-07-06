@@ -1,64 +1,69 @@
-import React, { useState } from 'react';
 import {
 	Card,
 	CardContent,
-	CardActions,
-	Typography,
 	Checkbox,
 	IconButton,
 	Grid,
 	Divider,
+	Typography,
 } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
-import { makeStyles } from '@material-ui/styles';
+import CardStyles from './Card.styles';
+import { CardProps } from './Card.props';
+import { useTodoCard } from '../../../hooks';
+import { Text } from '../../atoms';
 
-const useStyles = makeStyles(() => ({
-	dividerContent: {
-		backgroundColor: 'red',
-		boxShadow: '0 2px 4px red', // Customize the box shadow values as needed
-	},
-	cardContainer: {
-		width: '100%',
-	},
-}));
-const TodoCard = (todo: any) => {
-	const { title, description } = todo;
-	const [expanded, setExpanded] = useState(false);
-	const classes = useStyles();
+export const TodoCard = (todo: CardProps) => {
+	const { id, title, description, priority, time } = todo;
+	const {
+		checked,
+		expanded,
+		typographyRef,
+		handleChange,
+		deletePending,
+		toggleExpanded,
+		isWrapped,
+	} = useTodoCard(id);
 
-	const toggleExpanded = () => {
-		setExpanded(!expanded);
-	};
 	return (
-		<Card className={classes.cardContainer}>
+		<Card sx={CardStyles}>
 			<CardContent>
 				<Grid container columnSpacing={2} alignItems="center">
 					<Grid item>
-						<Checkbox />
+						<Checkbox checked={checked} onChange={handleChange} />
 					</Grid>
-					<Divider
-						orientation="vertical"
-						flexItem
-						className={classes.dividerContent}
-					/>
-					<Grid item xs={7} sx={{ flex: 1 }}>
-						<Typography variant="h6">{title}</Typography>
-						<Typography variant="body1" noWrap={!expanded}>
+					<Divider orientation="vertical" flexItem className={priority} />
+					<Grid item xs={7}>
+						<Text
+							text={title}
+							variant="h6"
+							style={checked ? { textDecoration: 'line-through' } : {}}
+						/>
+
+						<Typography variant="body1" noWrap={!expanded} ref={typographyRef}>
 							{description}
 						</Typography>
-						<Typography variant="caption" color="teritaryText.main">
-							{'Hight Priority'}
-						</Typography>
 
-						<Typography
-							variant="body2"
-							color="primary"
-							onClick={toggleExpanded}>
-							{expanded ? 'Collapse' : 'Expand'}
-						</Typography>
+						<Text
+							text={`${priority} Priority`}
+							variant="caption"
+							color="teritaryText.main"
+						/>
+
+						<div>
+							<Text variant="caption" color="secondary" text={time} />
+						</div>
+						{isWrapped && (
+							<Text
+								text={expanded ? 'Collapse' : 'Expand'}
+								variant="body1"
+								color="icon"
+								onClick={toggleExpanded}
+							/>
+						)}
 					</Grid>
 					<Grid item>
-						<IconButton>
+						<IconButton onClick={deletePending}>
 							<DeleteIcon />
 						</IconButton>
 					</Grid>
@@ -67,5 +72,3 @@ const TodoCard = (todo: any) => {
 		</Card>
 	);
 };
-
-export default TodoCard;

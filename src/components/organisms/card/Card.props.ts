@@ -1,10 +1,11 @@
-export type PRIORITY = 'high' | 'medium' | 'low';
+export type PRIORITY = 'high' | 'low';
 export type STATUS = 'done' | 'active' | 'deleted';
 
 export interface CardProps {
 	id?: number | any;
+	title: string;
 	priority: PRIORITY;
-	description: string;
+	description?: string;
 	status: STATUS;
 	time: string;
 }
