@@ -6,7 +6,6 @@ interface PrioritySelect {
 }
 export const priorities: PrioritySelect[] = [
 	{ label: 'high', value: 'high' },
-	{ label: 'medium', value: 'medium' },
 	{ label: 'low', value: 'low' },
 ];
 interface StatusSelect {
