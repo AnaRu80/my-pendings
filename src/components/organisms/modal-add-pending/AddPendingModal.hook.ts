@@ -1,8 +1,8 @@
 import { TypedUseSelectorHook, useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { pendingActions } from '../../../store/pending-slice';
-import { RootState } from '../../../store';
+import { addToPendings } from '../../../store/slices/pendingSlice';
+import { RootState } from '../../../store/store';
 import { IFormInput } from './AddPendingModal.props';
 import moment from 'moment';
 
@@ -27,7 +27,7 @@ export const useAddPendingModal = (onClose: any) => {
 
 	const onSubmit: SubmitHandler<IFormInput> = data => {
 		dispatch(
-			pendingActions.addToPendings({
+			addToPendings({
 				id: list.length + 1,
 				priority: data.priority,
 				description: data.description,

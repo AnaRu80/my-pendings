@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { CardProps, STATUS } from '../components/organisms/card/Card.props';
+import { CardProps, STATUS } from '../../components/organisms/card/Card.props';
 
 export interface PendingListProps extends CardProps {}
 interface PendingsInterface {
@@ -34,7 +34,7 @@ const initialState: PendingsInterface = {
 	totalDone: 0,
 	totalActive: 0,
 };
-const pendingsSlice = createSlice({
+export const pendingsSlice = createSlice({
 	name: 'pendings',
 	initialState,
 	reducers: {
@@ -87,5 +87,5 @@ const pendingsSlice = createSlice({
 	},
 });
 
-export const pendingActions = pendingsSlice.actions;
-export default pendingsSlice;
+export const { addToPendings, deleteFromPendings, doneFromPendings } =
+	pendingsSlice.actions;

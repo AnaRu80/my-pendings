@@ -1,4 +1,5 @@
 import { SxProps } from '@mui/material';
+import { colors } from '../../../Theme/palette';
 
 const CardStyles = {
 	maxWidth: 300,
@@ -11,17 +12,17 @@ const CardStyles = {
 		},
 	},
 	'.high': {
-		backgroundColor: 'red',
+		backgroundColor: colors.dark.error,
 		height: 100,
 	},
 
 	'.medium': {
-		backgroundColor: '#43ED3F',
+		backgroundColor: colors.dark.success,
 		height: 100,
 	},
 
 	'.low': {
-		backgroundColor: 'blue',
+		backgroundColor: colors.light.primary,
 		height: 100,
 	},
 };

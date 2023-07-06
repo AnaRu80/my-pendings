@@ -1,7 +1,7 @@
 import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
-import { Card } from '..';
-import { PendingListProps } from '../../../store/pending-slice';
+import { PendingListProps } from '../../../store/slices/pendingSlice';
+import TodoCard from '../card/TodoCard';
 
 export function SortableItem(props: PendingListProps) {
 	const { id, description, priority, status, time } = props;
@@ -11,18 +11,20 @@ export function SortableItem(props: PendingListProps) {
 	const style = {
 		transform: CSS.Transform.toString(transform),
 		transition,
+		marginBottom: '13px',
 	};
 
 	return (
 		<div ref={setNodeRef} style={style} {...attributes} {...listeners}>
-			<Card
+			<TodoCard
 				key={id}
 				id={id}
+				title="title"
 				description={description}
 				priority={priority}
 				status={status}
 				time={time}
-			/>{' '}
+			/>
 		</div>
 	);
 }

@@ -1,16 +1,12 @@
 import React, { useState, useMemo } from 'react';
 import { Button, Text } from '../components/atoms';
 import { TypedUseSelectorHook, useSelector } from 'react-redux';
-import type { RootState } from '../store';
+import type { RootState } from '../store/store';
+import AddIcon from '@mui/icons-material/Add';
 
-import {
-	AddCard,
-	AddPendingModal,
-	Footer,
-	SortableItem,
-} from '../components/organisms';
+import { AddPendingModal, Footer, SortableItem } from '../components/organisms';
 import { Box, Grid } from '@mui/material';
-import { PendingListProps } from '../store/pending-slice';
+import { PendingListProps } from '../store/slices/pendingSlice';
 import {
 	DndContext,
 	closestCenter,
@@ -71,16 +67,16 @@ export default function HomePage() {
 				text="Sort by Due Date"
 				onClick={handleSortDueDate}
 				className="margin-button"
+				color="primary"
 			/>
 			<DndContext
 				sensors={sensors}
 				collisionDetection={closestCenter}
 				onDragEnd={handlerDragEnd}>
 				<Grid
-					container
-					spacing={{ xs: 2, md: 3 }}
-					columns={{ xs: 1, sm: 2, md: 4 }}>
-					<AddCard openModal={() => setIsModalOpen(true)} />
+					spacing={{ xs: 1, md: 3 }}
+					columns={{ xs: 1, sm: 2, md: 4 }}
+					sx={{ my: 3 }}>
 					<SortableContext items={pendings} strategy={rectSortingStrategy}>
 						{pendings?.map((pending: PendingListProps) => (
 							<SortableItem
@@ -98,7 +94,7 @@ export default function HomePage() {
 			{list.length == 0 && (
 				<Text
 					variant="h2"
-					color={'black'}
+					color={'primary'}
 					text="You don't have active pendings"
 				/>
 			)}
@@ -106,6 +102,13 @@ export default function HomePage() {
 				isModalOpen={isModalOpen}
 				onClose={() => setIsModalOpen(false)}
 			/>
+			<Button
+				text="Create Task"
+				startIcon={<AddIcon />}
+				size="small"
+				onClick={() => setIsModalOpen(true)}
+			/>
+
 			<Footer />
 		</Box>
 	);
