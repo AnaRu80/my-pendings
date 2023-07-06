@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Box } from '@mui/material';
 import { TypedUseSelectorHook, useSelector } from 'react-redux';
 
-import { RootState } from '../../../store';
+import { RootState } from '../../../store/store';
 import { Text } from '../../atoms';
 export function Footer() {
 	const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;

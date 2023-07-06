@@ -23,6 +23,7 @@ export interface IFormInput {
 	description: string;
 	priority: {} | { label: PRIORITY; value: string };
 	status: {} | { label: STATUS; value: string };
+	datePicker: Date | null;
 }
 export interface propsModal {
 	isModalOpen: boolean;

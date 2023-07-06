@@ -1,9 +1,9 @@
 import { configureStore } from '@reduxjs/toolkit';
-import pendingSlice from './pending-slice';
-
+import { themeSlice, pendingsSlice } from './slices';
 const store = configureStore({
 	reducer: {
-		pending: pendingSlice.reducer,
+		pending: pendingsSlice.reducer,
+		theme: themeSlice.reducer,
 	},
 });
 export type RootState = ReturnType<typeof store.getState>;

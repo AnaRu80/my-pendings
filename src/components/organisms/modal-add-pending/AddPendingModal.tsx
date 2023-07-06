@@ -1,19 +1,14 @@
 import React, { useState } from 'react';
-import { TypedUseSelectorHook, useSelector } from 'react-redux';
-import { useDispatch } from 'react-redux';
-
 import { Input, SelectInput, Text } from '../../atoms';
 import { Modal } from '../../molecules';
-import { Controller, SubmitHandler, useForm } from 'react-hook-form';
-import { pendingActions } from '../../../store/pending-slice';
-import { RootState } from '../../../store';
-import {
-	status,
-	priorities,
-	propsModal,
-	IFormInput,
-} from './AddPendingModal.props';
+import { Controller } from 'react-hook-form';
+
+import { status, priorities, propsModal } from './AddPendingModal.props';
 import { useAddPendingModal } from './AddPendingModal.hook';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
+import './styles.css';
+import moment from 'moment';
 
 export function AddPendingModal(props: propsModal) {
 	const { isModalOpen, onClose } = props;
@@ -83,6 +78,20 @@ export function AddPendingModal(props: propsModal) {
 							<Text text="Status is required" color="error" />
 						)}
 					</>
+				)}
+			/>
+			<Controller
+				name={'datePicker'}
+				control={control}
+				rules={{ required: true }}
+				render={({ field }) => (
+					<DatePicker
+						placeholderText="Select date"
+						onChange={date => field.onChange(date)}
+						selected={field.value}
+						minDate={moment().toDate()}
+						showDisabledMonthNavigation
+					/>
 				)}
 			/>
 		</Modal>
