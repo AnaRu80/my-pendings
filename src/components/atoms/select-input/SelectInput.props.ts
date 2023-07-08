@@ -7,4 +7,5 @@ interface options {
 export interface SelectInputProps extends SelectProps {
 	label?: string;
 	options: options[];
+	helperText: string;
 }

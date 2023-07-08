@@ -1,4 +1,4 @@
-export * from './modal-add-pending/AddPendingModal';
+export * from './add-task-form/AddTaskModal';
 export * from './footer/Footer';
 export * from './navbar/NavBar';
 export * from './sortable-item/SortableItem';

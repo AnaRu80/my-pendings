@@ -16,6 +16,7 @@ export function Modal(props: ModalProps) {
 		open,
 		children,
 		title,
+		disableMainButton = false,
 	} = props;
 
 	return (
@@ -31,7 +32,12 @@ export function Modal(props: ModalProps) {
 					/>
 				)}
 				{mainButtonText && (
-					<Button onClick={mainFunction} type="submit" text={mainButtonText} />
+					<Button
+						onClick={mainFunction}
+						type="submit"
+						disabled={disableMainButton}
+						text={mainButtonText}
+					/>
 				)}
 			</DialogActions>
 		</Dialog>
