@@ -20,6 +20,7 @@ export const status: StatusSelect[] = [
 
 export interface IFormInput {
 	description: string;
+	title: string;
 	priority: {} | { label: PRIORITY; value: string };
 	status: {} | { label: STATUS; value: string };
 	datePicker: Date | null;

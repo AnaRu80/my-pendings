@@ -4,7 +4,7 @@ import { TypedUseSelectorHook, useSelector } from 'react-redux';
 import type { RootState } from '../store/store';
 import AddIcon from '@mui/icons-material/Add';
 
-import { AddPendingModal, Footer, SortableList } from '../components/organisms';
+import { AddTaskModal, Footer, SortableList } from '../components/organisms';
 import { Box } from '@mui/material';
 import HomePageStyles from './HomePage.styles';
 
@@ -45,7 +45,7 @@ export default function HomePage() {
 					text="You don't have active pendings"
 				/>
 			)}
-			<AddPendingModal
+			<AddTaskModal
 				isModalOpen={isModalOpen}
 				onClose={() => setIsModalOpen(false)}
 			/>
