@@ -2,7 +2,7 @@ import { ThemeProvider } from '@mui/material/styles';
 import { CssBaseline } from '@mui/material';
 import { useSelector } from 'react-redux';
 
-import HomePage from './pages/HomePage';
+import HomePage from './pages/home-page/HomePage';
 import { theme } from './Theme/theme';
 import { Navbar } from './components/organisms';
 import { useState } from 'react';
@@ -18,17 +18,15 @@ export default function App() {
 
 	return (
 		<ThemeProvider theme={themeFn(isDarkMode)}>
-			<div style={{ overflowX: 'hidden' }}>
-				<CssBaseline />
-				<Navbar
-					date="July 5, 2023"
-					title="Tasks List"
-					activeTab={activeTab}
-					onChangeTab={handleTabChange}
-				/>
+			<CssBaseline />
+			<Navbar
+				date="July 5, 2023"
+				title="Tasks List"
+				activeTab={activeTab}
+				onChangeTab={handleTabChange}
+			/>
 
-				<HomePage />
-			</div>
+			<HomePage activeTab={activeTab} />
 		</ThemeProvider>
 	);
 }

@@ -3,19 +3,6 @@ import { colors } from './palette';
 
 import '@mui/material/styles';
 
-// declare module '@mui/material/styles' {
-// 	interface Palette {
-// 		// secondaryText: PaletteColorOptions;
-// 		teritaryText: PaletteColorOptions;
-// 		icon: PaletteColorOptions;
-// 	}
-// 	interface PaletteOptions {
-// 		// secondaryText: PaletteColorOptions;
-// 		teritaryText: PaletteColorOptions;
-// 		icon: PaletteColorOptions;
-// 	}
-// }
-
 declare module '@mui/material/styles' {
 	interface Palette {
 		secondaryText: Palette['primary'];
@@ -30,7 +17,6 @@ export const theme = (darkMode: boolean) => {
 		mode: darkMode ? 'dark' : 'light',
 		primary: {
 			main: darkMode ? colors.dark.primary : colors.light.primary,
-			// contrastText: darkMode ? colors.dark.text : colors.light.text,
 		},
 		secondary: {
 			main: darkMode ? colors.dark.secondary : colors.light.secondary,

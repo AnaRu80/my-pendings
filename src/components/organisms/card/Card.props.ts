@@ -1,5 +1,5 @@
 export type PRIORITY = 'high' | 'low';
-export type STATUS = 'done' | 'active' | 'deleted';
+export type STATUS = 'completed' | 'active';
 
 export interface CardProps {
 	id?: number | any;

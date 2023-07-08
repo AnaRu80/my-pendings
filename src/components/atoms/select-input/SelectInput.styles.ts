@@ -2,7 +2,6 @@ import { SxProps } from '@mui/material';
 
 const SelectInputStyles: SxProps = {};
 export const SelectContainer: SxProps = {
-	marginTop: 4,
-	marginBottom: 4,
+	marginBottom: 2,
 };
 export default SelectInputStyles;

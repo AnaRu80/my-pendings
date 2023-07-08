@@ -1,2 +1,2 @@
-export * from './pendingSlice';
+export * from './taskSlice';
 export * from './themeSlice';
