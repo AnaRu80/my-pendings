@@ -3,9 +3,10 @@ import { useDispatch, TypedUseSelectorHook, useSelector } from 'react-redux';
 import moment from 'moment';
 
 import { PRIORITY } from '../card/Card.props';
-import { addToPendings } from '../../../store/slices/pendingSlice';
+import { addTask } from '../../../store/slices/taskSlice';
 import { RootState } from '../../../store/store';
 import { useForm } from '../../../hooks';
+import { generateRandomId } from '../../../utils';
 
 const today = moment();
 
@@ -39,7 +40,7 @@ export function useAddTaskForm(onClose: any) {
 
 	const dispatch = useDispatch();
 	const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
-	const list = useAppSelector((state): any => state.pending.pendingsList);
+	const list = useAppSelector((state): any => state.task.tasksList);
 	const {
 		title,
 		priority,
@@ -53,16 +54,16 @@ export function useAddTaskForm(onClose: any) {
 		isFormValid,
 		onResetForm,
 	}: any = useForm(formData, formValidations);
+
 	const onSubmit: (event: any) => void = event => {
 		event.preventDefault();
 		setFormSubmitted(true);
 
-		console.log('forma', formState, formValidation);
 		if (!isFormValid) return;
-		console.log('forma2', list.length, formValidation);
+		const id = generateRandomId();
 		dispatch(
-			addToPendings({
-				id: list.length + 1,
+			addTask({
+				id,
 				title: title,
 				priority: priority,
 				description: description,

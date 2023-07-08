@@ -1,15 +1,14 @@
 import { useEffect, useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { deleteFromPendings, doneFromPendings } from '../store/slices';
+import { deleteTaskbyId, toggleCompleteTask } from '../../../store/slices';
 
-export function useTodoCard(id: string) {
+export function useCard(id: string) {
 	const [expanded, setExpanded] = useState(false);
-	const [checked, setChecked] = useState(false);
 
 	const dispatch = useDispatch();
 
-	const deletePending = () => dispatch(deleteFromPendings({ id }));
-	const donePending = () => dispatch(doneFromPendings({ id }));
+	const deleteTask = () => dispatch(deleteTaskbyId({ id }));
+	const completeTask = () => dispatch(toggleCompleteTask({ id }));
 
 	const toggleExpanded = () => {
 		setExpanded(!expanded);
@@ -27,12 +26,10 @@ export function useTodoCard(id: string) {
 	}, []);
 
 	const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-		donePending();
-		setChecked(event.target.checked);
+		completeTask();
 	};
 	return {
-		checked,
-		deletePending,
+		deleteTask,
 		toggleExpanded,
 		isWrapped,
 		expanded,

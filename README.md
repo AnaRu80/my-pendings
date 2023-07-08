@@ -1,6 +1,6 @@
-# React My Pendings
+# React My Tasks
 
-This is a simple React Pending list application that allows you to add, delete, and mark items as Done.
+This is a simple React Task list application that allows you to add, delete, and mark items as Done.
 
 ## Getting Started
 
@@ -36,12 +36,12 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Features
 
-- Add a new pending to the list
-- Mark an active pending as Done
-- Delete an active pending
-- Add all the Pending Actives
-- Add all the Pending Done
-- Add hook for all the logic in the Modal of Add Pending
+- Add a new task to the list
+- Mark an active task as Done
+- Delete an active task
+- Add all the Task Actives
+- Add all the Task Done
+- Add hook for all the logic in the Modal of Add Task
 
 Pull requests are welcome. For major changes, please open an issue first
 to discuss what you would like to change.

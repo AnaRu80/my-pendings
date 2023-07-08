@@ -13,7 +13,6 @@ export interface ColorPalette {
 export interface ThemePalette {
 	light: ColorPalette;
 	dark: ColorPalette;
-	// colorBlind: ColorPalette;
 }
 
 export const colors: ThemePalette = {
@@ -39,14 +38,4 @@ export const colors: ThemePalette = {
 		error: '#e57373',
 		success: '#81c784',
 	},
-	// colorBlind: {
-	// 	primary: '#5c6bc0',
-	// 	secondary: '#f06292',
-	// 	background: '#e0e0e0',
-	// 	text: '#494949',
-	// 	neutral: '#494949',
-
-	// 	error: '#ef5350',
-	// 	success: '#66bb6a',
-	// },
 };

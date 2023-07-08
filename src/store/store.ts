@@ -1,8 +1,8 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { themeSlice, pendingsSlice } from './slices';
+import { themeSlice, tasksSlice } from './slices';
 const store = configureStore({
 	reducer: {
-		pending: pendingsSlice.reducer,
+		task: tasksSlice.reducer,
 		theme: themeSlice.reducer,
 	},
 });

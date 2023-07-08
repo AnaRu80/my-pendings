@@ -1,5 +1,5 @@
 import {
-	Card,
+	Card as CardMui,
 	CardContent,
 	Checkbox,
 	IconButton,
@@ -10,34 +10,34 @@ import {
 import DeleteIcon from '@mui/icons-material/Delete';
 import CardStyles from './Card.styles';
 import { CardProps } from './Card.props';
-import { useTodoCard } from '../../../hooks';
+import { useCard } from './useCard';
 import { Text } from '../../atoms';
 
-export const TodoCard = (todo: CardProps) => {
-	const { id, title, description, priority, time } = todo;
+export const Card = (todo: CardProps) => {
+	const { id, title, description, priority, time, status } = todo;
 	const {
-		checked,
 		expanded,
 		typographyRef,
 		handleChange,
-		deletePending,
+		deleteTask,
 		toggleExpanded,
 		isWrapped,
-	} = useTodoCard(id);
+	} = useCard(id);
 
+	const isActive = status == 'active' ? false : true;
 	return (
-		<Card sx={CardStyles}>
+		<CardMui sx={CardStyles}>
 			<CardContent>
 				<Grid container columnSpacing={2} alignItems="center">
 					<Grid item>
-						<Checkbox checked={checked} onChange={handleChange} />
+						<Checkbox checked={isActive} onChange={handleChange} />
 					</Grid>
 					<Divider orientation="vertical" flexItem className={priority} />
 					<Grid item xs={7}>
 						<Text
 							text={title}
 							variant="h6"
-							style={checked ? { textDecoration: 'line-through' } : {}}
+							style={isActive ? { textDecoration: 'line-through' } : {}}
 						/>
 
 						<Typography variant="body1" noWrap={!expanded} ref={typographyRef}>
@@ -63,12 +63,12 @@ export const TodoCard = (todo: CardProps) => {
 						)}
 					</Grid>
 					<Grid item>
-						<IconButton onClick={deletePending}>
+						<IconButton onClick={deleteTask}>
 							<DeleteIcon />
 						</IconButton>
 					</Grid>
 				</Grid>
 			</CardContent>
-		</Card>
+		</CardMui>
 	);
 };

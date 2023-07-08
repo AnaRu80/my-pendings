@@ -1,6 +1,5 @@
 import { Modal } from '../../molecules';
 import { propsModal } from './AddTaskModal.props';
-import './styles.css';
 import { AddTaskForm } from './AddTaskForm';
 import { useAddTaskForm } from './useAdTaskForm';
 
@@ -10,8 +9,8 @@ export function AddTaskModal(props: propsModal) {
 	return (
 		<Modal
 			open={isModalOpen}
-			title="New Pending"
-			mainButtonText="Add Pending"
+			title="New Task"
+			mainButtonText="Add Task"
 			mainFunction={(event: any) => onSubmit(event)}
 			secondaryButtonText="Close"
 			secondaryFunction={onClose}

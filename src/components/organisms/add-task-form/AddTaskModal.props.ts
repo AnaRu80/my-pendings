@@ -13,9 +13,8 @@ interface StatusSelect {
 	value: string;
 }
 export const status: StatusSelect[] = [
-	{ label: 'done', value: 'done' },
+	{ label: 'completed', value: 'completed' },
 	{ label: 'active', value: 'active' },
-	{ label: 'deleted', value: 'deleted' },
 ];
 
 export interface IFormInput {
