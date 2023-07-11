@@ -1,18 +1,21 @@
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
+import { useDispatch, TypedUseSelectorHook, useSelector } from 'react-redux';
 import moment from 'moment';
 
 import { PRIORITY } from '../card/Card.props';
-import { addTask } from '../../../store/slices/taskSlice';
-import { useAppRedux, useForm } from '../../../hooks';
-import { generateRandomId } from '../../../utils';
+import { updateTaskbyId } from '../../../store/slices/taskSlice';
+import { RootState } from '../../../store/store';
+// import { useForm } from '../../../hooks';
 import { closeModal } from '../../../store/slices';
+import { useForm } from '../../../hooks/useForm';
 
 const today = moment();
 
 const formData = {
-	priority: 'low',
+	priority: '',
 	title: '',
 	description: '',
+	status: '',
 	time: today,
 };
 
@@ -34,40 +37,58 @@ const formValidations = {
 
 	title: [(value: string) => value.length >= 1, 'The task is required'],
 };
-export function useAddTaskForm() {
-	const { select, dispatch } = useAppRedux();
-
+export function useEditTaskForm(id: string | undefined) {
 	const [formSubmitted, setFormSubmitted] = useState(false);
-	const isModalOpen = select((state: any) => state.modal.modals['addTask']);
+	const isModalOpen = useSelector((state: any) => state.modal.isOpen);
+
+	const dispatch = useDispatch();
+	const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
+	const list = useAppSelector((state): any => state.task.tasksList);
+
+	const initialFormData = useMemo(() => {
+		if (id) {
+			const taskById = list.find((task: any) => task.id === id);
+
+			return {
+				priority: taskById?.priority,
+				title: taskById?.title,
+				description: taskById?.description,
+				status: taskById?.status,
+				time: moment(taskById?.time),
+			};
+		} else {
+			return formData;
+		}
+	}, [id]);
 	const {
 		title,
 		priority,
 		description,
 		time,
+		status,
 		onInputChange,
 		onDataChange,
 		formState,
 		formValidation,
 		isFormValid,
 		onResetForm,
-	}: any = useForm(formData, formValidations);
+	}: any = useForm(initialFormData, formValidations);
 
 	const handleCloseModal = () => {
-		dispatch(closeModal({ modalName: 'addTask' }));
+		dispatch(closeModal({ modalName: 'editTask' }));
 	};
 	const onSubmit: (event: any) => void = event => {
 		event.preventDefault();
 		setFormSubmitted(true);
-
 		if (!isFormValid) return;
-		const id = generateRandomId();
+
 		dispatch(
-			addTask({
+			updateTaskbyId({
 				id,
 				title: title,
 				priority: priority,
 				description: description,
-				status: 'active',
+				status: status,
 				time: moment(time).format('D MMMM YYYY'),
 			})
 		);

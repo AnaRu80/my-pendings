@@ -1,11 +1,10 @@
 import { Modal } from '../../molecules';
-import { propsModal } from './AddTaskModal.props';
 import { AddTaskForm } from './AddTaskForm';
 import { useAddTaskForm } from './useAdTaskForm';
 
-export function AddTaskModal(props: propsModal) {
-	const { isModalOpen, onClose } = props;
-	const { onSubmit, ...formProps }: any = useAddTaskForm(onClose);
+export function AddTaskModal() {
+	const { onSubmit, isModalOpen, handleCloseModal, ...formProps }: any =
+		useAddTaskForm();
 	return (
 		<Modal
 			open={isModalOpen}
@@ -13,7 +12,7 @@ export function AddTaskModal(props: propsModal) {
 			mainButtonText="Add Task"
 			mainFunction={(event: any) => onSubmit(event)}
 			secondaryButtonText="Close"
-			secondaryFunction={onClose}
+			secondaryFunction={handleCloseModal}
 			disableMainButton={!formProps.isFormValid}>
 			<AddTaskForm {...formProps} />
 		</Modal>

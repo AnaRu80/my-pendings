@@ -1,41 +1,29 @@
-import { Button } from '../../components/atoms';
-import AddIcon from '@mui/icons-material/Add';
-
-import { AddTaskModal, Footer, SortableList } from '../../components/organisms';
+import {
+	AddTaskModal,
+	ActionButtons,
+	SortableList,
+} from '../../components/organisms';
 import { Box } from '@mui/material';
 import HomePageStyles from './HomePage.styles';
 import { EmptyTaskTemplate } from '../../components/molecules';
 import { useHomePage } from './useHomePage.hooks';
+import { EditTaskModal } from '../../components/organisms/edit-task-modal/EditTaskModal';
 
-export default function HomePage({ activeTab }: any) {
-	const { handleSortDueDate, tasks, setTasks, isModalOpen, setIsModalOpen } =
-		useHomePage(activeTab);
+export default function HomePage({ activeTab, appBarHeight }: any) {
+	const { handleSortDueDate, tasks, setTasks } = useHomePage(activeTab);
 
+	const sxStyles = [
+		...(Array.isArray(HomePageStyles) ? HomePageStyles : [HomePageStyles]),
+		{ marginTop: `${appBarHeight + 16}px` },
+	];
 	return (
-		<Box sx={HomePageStyles}>
-			<Button
-				text="Sort by Due Date"
-				onClick={handleSortDueDate}
-				sx={{ mt: 2 }}
-				color="primary"
-			/>
+		<Box sx={sxStyles}>
+			<ActionButtons handleSortDueDate={handleSortDueDate} />
 			<Box className="listContainer">
 				<SortableList tasks={tasks} setTasks={setTasks} />
 				{tasks.length == 0 && <EmptyTaskTemplate activeTab={activeTab} />}
-				<AddTaskModal
-					isModalOpen={isModalOpen}
-					onClose={() => setIsModalOpen(false)}
-				/>
-			</Box>
-			<Box className="footerContainer">
-				<Button
-					text="Create Task"
-					sx={{ mb: 1 }}
-					startIcon={<AddIcon />}
-					size="small"
-					onClick={() => setIsModalOpen(true)}
-				/>
-				<Footer />
+				<AddTaskModal />
+				<EditTaskModal />
 			</Box>
 		</Box>
 	);

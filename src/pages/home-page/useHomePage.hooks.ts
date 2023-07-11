@@ -4,7 +4,6 @@ import type { RootState } from '../../store/store';
 
 export function useHomePage(activeTab: any) {
 	const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
-	const [isModalOpen, setIsModalOpen] = useState(false);
 
 	const list = useAppSelector((state): any => state.task.tasksList);
 	const [tasks, setTasks] = useState<any>(list);
@@ -46,7 +45,5 @@ export function useHomePage(activeTab: any) {
 		handleSortDueDate,
 		tasks,
 		setTasks,
-		isModalOpen,
-		setIsModalOpen,
 	};
 }

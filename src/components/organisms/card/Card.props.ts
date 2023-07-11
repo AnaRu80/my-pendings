@@ -9,7 +9,3 @@ export interface CardProps {
 	status: STATUS;
 	time: string;
 }
-
-export interface SimpleCardProps {
-	openModal: () => void;
-}
