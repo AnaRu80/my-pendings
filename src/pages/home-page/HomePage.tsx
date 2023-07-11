@@ -1,5 +1,6 @@
 import {
 	AddTaskModal,
+	EditTaskModal,
 	ActionButtons,
 	SortableList,
 } from '../../components/organisms';
@@ -7,7 +8,6 @@ import { Box } from '@mui/material';
 import HomePageStyles from './HomePage.styles';
 import { EmptyTaskTemplate } from '../../components/molecules';
 import { useHomePage } from './useHomePage.hooks';
-import { EditTaskModal } from '../../components/organisms/edit-task-modal/EditTaskModal';
 
 export default function HomePage({ activeTab, appBarHeight }: any) {
 	const { handleSortDueDate, tasks, setTasks } = useHomePage(activeTab);

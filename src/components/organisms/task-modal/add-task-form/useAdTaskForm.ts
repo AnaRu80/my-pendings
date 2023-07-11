@@ -1,39 +1,12 @@
 import { useState } from 'react';
 import moment from 'moment';
 
-import { PRIORITY } from '../card/Card.props';
-import { addTask } from '../../../store/slices/taskSlice';
-import { useAppRedux, useForm } from '../../../hooks';
-import { generateRandomId } from '../../../utils';
-import { closeModal } from '../../../store/slices';
+import { addTask } from '../../../../store/slices/taskSlice';
+import { useAppRedux, useForm } from '../../../../hooks';
+import { generateRandomId } from '../../../../utils';
+import { closeModal } from '../../../../store/slices';
+import { formData, formValidations } from '../helpers';
 
-const today = moment();
-
-const formData = {
-	priority: 'low',
-	title: '',
-	description: '',
-	time: today,
-};
-
-const formValidations = {
-	time: [
-		(value: any) =>
-			value != null
-				? moment(value).format() != 'Invalid date'
-					? true
-					: false
-				: false,
-		'The time is required',
-	],
-	priority: [
-		(value: PRIORITY) =>
-			value == 'high' ? true : value == 'low' ? true : false,
-		'The priority is required',
-	],
-
-	title: [(value: string) => value.length >= 1, 'The task is required'],
-};
 export function useAddTaskForm() {
 	const { select, dispatch } = useAppRedux();
 
@@ -53,6 +26,8 @@ export function useAddTaskForm() {
 	}: any = useForm(formData, formValidations);
 
 	const handleCloseModal = () => {
+		onResetForm();
+		setFormSubmitted(false);
 		dispatch(closeModal({ modalName: 'addTask' }));
 	};
 	const onSubmit: (
@@ -73,8 +48,7 @@ export function useAddTaskForm() {
 				time: moment(time).format('D MMMM YYYY'),
 			})
 		);
-		onResetForm();
-		setFormSubmitted(false);
+
 		handleCloseModal();
 	};
 

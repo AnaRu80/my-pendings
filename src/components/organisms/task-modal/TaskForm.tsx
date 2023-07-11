@@ -1,9 +1,9 @@
 import { Grid, TextField } from '@mui/material';
 import { SelectInput } from '../../atoms';
-import { priorities } from './AddTaskModal.props';
 import { DatePicker } from '../../molecules';
+import { priorities } from './TaskModal.props';
 
-export const AddTaskForm = (props: any) => {
+export const TaskForm = (props: any) => {
 	const {
 		formSubmitted,
 		priority,
@@ -39,6 +39,7 @@ export const AddTaskForm = (props: any) => {
 					fullWidth
 					name="title"
 					value={title}
+					inputProps={{ maxLength: 19 }}
 					onChange={onInputChange}
 					error={!!titleValid && formSubmitted}
 					helperText={!!titleValid && formSubmitted && titleValid}
@@ -47,6 +48,7 @@ export const AddTaskForm = (props: any) => {
 			<Grid item xs={12} sx={{ mt: 2 }}>
 				<TextField
 					label="Description"
+					multiline={true}
 					type="text"
 					placeholder="Description"
 					fullWidth

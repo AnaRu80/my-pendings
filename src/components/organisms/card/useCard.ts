@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { deleteTaskbyId, toggleCompleteTask } from '../../../store/slices';
 
-export function useCard(id: string) {
+export function useCard(id: string, description: string | undefined) {
 	const [expanded, setExpanded] = useState(false);
 
 	const dispatch = useDispatch();
@@ -15,7 +15,9 @@ export function useCard(id: string) {
 	};
 	const completeTask = () => dispatch(toggleCompleteTask({ id }));
 
-	const toggleExpanded = () => {
+	const toggleExpanded = (event: any) => {
+		event.stopPropagation();
+
 		setExpanded(!expanded);
 	};
 
@@ -28,7 +30,7 @@ export function useCard(id: string) {
 				typographyElement.scrollWidth > typographyElement.clientWidth
 			);
 		}
-	}, []);
+	}, [description]);
 
 	const handleChange = (
 		event: React.BaseSyntheticEvent<Event, EventTarget & Element, EventTarget>
