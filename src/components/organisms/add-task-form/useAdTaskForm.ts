@@ -55,7 +55,9 @@ export function useAddTaskForm() {
 	const handleCloseModal = () => {
 		dispatch(closeModal({ modalName: 'addTask' }));
 	};
-	const onSubmit: (event: any) => void = event => {
+	const onSubmit: (
+		event: React.ChangeEvent<HTMLInputElement>
+	) => void = event => {
 		event.preventDefault();
 		setFormSubmitted(true);
 

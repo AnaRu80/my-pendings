@@ -1,10 +1,12 @@
-import moment from 'moment';
+import moment, { Moment } from 'moment';
 import { useState } from 'react';
 
-export function useDatePicker(onDataChange: any) {
+export function useDatePicker(
+	onDataChange: (time: string, formattedDate: Moment) => void
+) {
 	const today = moment();
 	const twoMonthsLater = today.clone().add(2, 'months');
-	const [error, setError] = useState<any>(null);
+	const [error, setError] = useState<string | null>(null);
 	const [helperError, setHelperError] = useState<string | null>('');
 
 	const handleDate = (date: any) => {

@@ -7,7 +7,9 @@ export function useCard(id: string) {
 
 	const dispatch = useDispatch();
 
-	const deleteTask = (event: any) => {
+	const deleteTask = (
+		event: React.BaseSyntheticEvent<Event, EventTarget & Element, EventTarget>
+	) => {
 		event.stopPropagation();
 		dispatch(deleteTaskbyId({ id }));
 	};
@@ -28,7 +30,10 @@ export function useCard(id: string) {
 		}
 	}, []);
 
-	const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+	const handleChange = (
+		event: React.BaseSyntheticEvent<Event, EventTarget & Element, EventTarget>
+	) => {
+		event.stopPropagation();
 		completeTask();
 	};
 	return {
