@@ -1,0 +1,1 @@
+{"version":3,"file":"static/css/main.b15a8b0c.css","mappings":"AAAA,KAEC,kCAAmC,CACnC,iCAAkC,CAFlC,QAAS,CAGT,eACD","sources":["index.css"],"sourcesContent":["body {\n\tmargin: 0;\n\t-webkit-font-smoothing: antialiased;\n\t-moz-osx-font-smoothing: grayscale;\n\toverflow: hidden;\n}\n"],"names":[],"sourceRoot":""}
