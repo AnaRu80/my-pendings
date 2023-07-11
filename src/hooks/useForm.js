@@ -5,7 +5,11 @@ export const useForm = (initialForm = {}, formValidations = {}) => {
 	const [formValidation, setFormValidation] = useState({});
 
 	useEffect(() => {
-		(async () => await createValidators())();
+		setFormState(initialForm);
+	}, [initialForm.title]);
+
+	useEffect(() => {
+		createValidators();
 	}, [formState]);
 
 	const isFormValid = useMemo(() => {
@@ -13,7 +17,7 @@ export const useForm = (initialForm = {}, formValidations = {}) => {
 			if (formValidation[formValue] != null) return false;
 		}
 		return true;
-	}, [formValidation, formState]);
+	}, [formValidation]);
 
 	const onInputChange = ({ target }) => {
 		const { name, value } = target;

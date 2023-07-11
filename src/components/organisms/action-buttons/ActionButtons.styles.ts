@@ -1,9 +1,9 @@
 import { SxProps } from '@mui/material';
 
-const FooterStyles: SxProps = {
+const ActionButtonsStyles: SxProps = {
 	flexDirection: 'row',
 	display: 'flex',
 	justifyContent: 'space-evenly',
 };
 
-export default FooterStyles;
+export default ActionButtonsStyles;

@@ -67,6 +67,24 @@ export const tasksSlice = createSlice({
 				state.tasksList = state.tasksList.filter(task => task.id !== id);
 			}
 		},
+		updateTaskbyId(state: TaskInterface, action) {
+			const id = action.payload.id;
+			const updatedTask = action.payload;
+			const updatedTasksList = state.tasksList.map(task => {
+				if (task.id === id) {
+					return {
+						...task,
+						...updatedTask,
+					};
+				}
+				return task;
+			});
+
+			return {
+				...state,
+				tasksList: updatedTasksList,
+			};
+		},
 		toggleCompleteTask(state, action) {
 			const id = action.payload.id;
 			const existingTask = state.tasksList.find(task => task.id === id);
@@ -81,5 +99,5 @@ export const tasksSlice = createSlice({
 	},
 });
 
-export const { addTask, deleteTaskbyId, toggleCompleteTask } =
+export const { addTask, updateTaskbyId, deleteTaskbyId, toggleCompleteTask } =
 	tasksSlice.actions;

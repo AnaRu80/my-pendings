@@ -1,4 +1,4 @@
-import React from 'react';
+import { forwardRef } from 'react';
 import { AppBar, Tabs, Tab } from '@mui/material';
 
 import { Switch, Text } from '../../atoms';
@@ -6,18 +6,16 @@ import { NavbarProps } from './NavBar.props';
 import { Box } from '@mui/system';
 import { useNavBar } from './useNavBar.hook';
 
-export const Navbar: React.FC<NavbarProps> = ({
-	title,
-	activeTab,
-	onChangeTab,
-}) => {
+export const Navbar = forwardRef<HTMLDivElement, NavbarProps>((props, ref) => {
+	const { title, activeTab, onChangeTab } = props;
 	const { isDarkMode, handleTabChange, handleDarkMode, todayDate } =
 		useNavBar(onChangeTab);
 
 	return (
 		<Box sx={{ flexGrow: 1 }}>
 			<AppBar
-				position="sticky"
+				ref={ref}
+				position="fixed"
 				enableColorOnDark
 				sx={{ px: 2, backgroundColor: 'background.default' }}>
 				<Switch
@@ -35,4 +33,4 @@ export const Navbar: React.FC<NavbarProps> = ({
 			</AppBar>
 		</Box>
 	);
-};
+});

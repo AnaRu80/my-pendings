@@ -7,7 +7,10 @@ export function useCard(id: string) {
 
 	const dispatch = useDispatch();
 
-	const deleteTask = () => dispatch(deleteTaskbyId({ id }));
+	const deleteTask = (event: any) => {
+		event.stopPropagation();
+		dispatch(deleteTaskbyId({ id }));
+	};
 	const completeTask = () => dispatch(toggleCompleteTask({ id }));
 
 	const toggleExpanded = () => {

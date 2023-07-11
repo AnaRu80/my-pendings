@@ -1,32 +1,31 @@
 import { ThemeProvider } from '@mui/material/styles';
 import { CssBaseline } from '@mui/material';
-import { useSelector } from 'react-redux';
 
 import HomePage from './pages/home-page/HomePage';
-import { theme } from './Theme/theme';
 import { Navbar } from './components/organisms';
-import { useState } from 'react';
+import { useApp } from './hooks';
 
 export default function App() {
-	const { isDarkMode } = useSelector((state: any) => state.theme);
-
-	const [activeTab, setActiveTab] = useState('all');
-	const themeFn: (isDarkMode: boolean) => any = theme;
-	const handleTabChange = (value: string) => {
-		setActiveTab(value);
-	};
-
+	const {
+		isDarkMode,
+		appBarHeight,
+		appBarRef,
+		activeTab,
+		handleTabChange,
+		themeFn,
+	} = useApp();
 	return (
 		<ThemeProvider theme={themeFn(isDarkMode)}>
 			<CssBaseline />
+
 			<Navbar
-				date="July 5, 2023"
+				ref={appBarRef}
 				title="Tasks List"
 				activeTab={activeTab}
 				onChangeTab={handleTabChange}
 			/>
 
-			<HomePage activeTab={activeTab} />
+			<HomePage appBarHeight={appBarHeight} activeTab={activeTab} />
 		</ThemeProvider>
 	);
 }

@@ -1,17 +1,15 @@
 import { SxProps } from '@mui/material';
 
 const HomePageStyles: SxProps = {
-	position: 'relative',
-	minHeight: '100vh',
-	overflow: 'hidden',
-	display: 'flex',
-	flexDirection: 'column',
-	alignItems: 'center',
+	flex: 1,
+	overflowY: 'auto',
+	padding: '0 16px',
+
 	'.listContainer': {
 		paddingX: '36px',
 		paddingBottom: 'calc(64px + 2px)',
 		overflowY: 'auto',
-		maxHeight: 'calc(100vh - 100px)',
+		maxHeight: '70vh',
 		width: '100%',
 	},
 	'.footerContainer': {
