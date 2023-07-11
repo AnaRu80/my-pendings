@@ -22,9 +22,9 @@ export const Card = (todo: CardProps) => {
 		deleteTask,
 		toggleExpanded,
 		isWrapped,
-	} = useCard(id);
+	} = useCard(id, description);
 
-	const isActive = status == 'active' ? false : true;
+	const isActive = status === 'active' ? false : true;
 	return (
 		<CardMui sx={CardStyles}>
 			<CardContent>
@@ -37,7 +37,7 @@ export const Card = (todo: CardProps) => {
 						/>
 					</Grid>
 					<Divider orientation="vertical" flexItem className={priority} />
-					<Grid item xs={7} onClick={onClick}>
+					<Grid item xs={7} onClick={onClick} sx={{ wordBreak: 'break-word' }}>
 						<Text
 							text={title}
 							variant="h6"

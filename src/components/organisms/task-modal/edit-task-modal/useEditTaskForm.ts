@@ -1,48 +1,22 @@
 import { useMemo, useState } from 'react';
-import { useDispatch, TypedUseSelectorHook, useSelector } from 'react-redux';
-import moment, { Moment } from 'moment';
+import moment from 'moment';
 
-import { CardProps, PRIORITY } from '../card/Card.props';
-import { updateTaskbyId } from '../../../store/slices/taskSlice';
-import { RootState } from '../../../store/store';
-import { closeModal } from '../../../store/slices';
-import { useForm } from '../../../hooks/useForm';
+import { CardProps } from '../../card/Card.props';
+import { updateTaskbyId } from '../../../../store/slices/taskSlice';
+import { RootState } from '../../../../store/store';
+import { closeModal } from '../../../../store/slices';
+import { useForm } from '../../../../hooks/useForm';
+import { useAppRedux } from '../../../../hooks';
+import { formData, formValidations } from '../helpers';
 
-const today = moment();
-
-const formData = {
-	priority: '',
-	title: '',
-	description: '',
-	status: '',
-	time: today,
-};
-
-const formValidations = {
-	time: [
-		(value: Moment) =>
-			value != null
-				? moment(value).format() != 'Invalid date'
-					? true
-					: false
-				: false,
-		'The time is required',
-	],
-	priority: [
-		(value: PRIORITY) =>
-			value == 'high' ? true : value == 'low' ? true : false,
-		'The priority is required',
-	],
-
-	title: [(value: string) => value.length >= 1, 'The task is required'],
-};
-export function useEditTaskForm(id: string | undefined) {
+export function useEditTaskForm() {
 	const [formSubmitted, setFormSubmitted] = useState(false);
-	const modal = useSelector((state: RootState) => state.modal);
+	const { select, dispatch } = useAppRedux();
 
-	const dispatch = useDispatch();
-	const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
-	const list = useAppSelector((state): CardProps[] => state.task.tasksList);
+	const modal = select((state: RootState) => state.modal.modals['editTask']);
+	const { id } = modal || {};
+
+	const list = select((state: RootState): CardProps[] => state.task.tasksList);
 
 	const initialFormData = useMemo(() => {
 		if (id) {
@@ -74,6 +48,8 @@ export function useEditTaskForm(id: string | undefined) {
 	}: any = useForm(initialFormData, formValidations);
 
 	const handleCloseModal = () => {
+		onResetForm();
+		setFormSubmitted(false);
 		dispatch(closeModal({ modalName: 'editTask' }));
 	};
 	const onSubmit: (
@@ -93,8 +69,7 @@ export function useEditTaskForm(id: string | undefined) {
 				time: moment(time).format('D MMMM YYYY'),
 			})
 		);
-		onResetForm();
-		setFormSubmitted(false);
+
 		handleCloseModal();
 	};
 
@@ -107,7 +82,7 @@ export function useEditTaskForm(id: string | undefined) {
 		formState,
 		onInputChange,
 		onDataChange,
-		...modal,
+		modal,
 		handleCloseModal,
 	};
 }
