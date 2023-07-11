@@ -1,6 +1,7 @@
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment';
 import { DatePicker as DatePickerMui } from '@mui/x-date-pickers/DatePicker';
+import { DatePickerProps } from './DatePicker.props';
 
 import { useDatePicker } from './useDatePicker.hook';
 
@@ -9,7 +10,7 @@ export const DatePicker = ({
 	onDataChange,
 	helperText,
 	timeValid,
-}: any) => {
+}: DatePickerProps) => {
 	const { handleError, handleDate, error, helperError, twoMonthsLater, today } =
 		useDatePicker(onDataChange);
 

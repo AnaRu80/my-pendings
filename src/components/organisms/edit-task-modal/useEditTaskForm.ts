@@ -1,11 +1,10 @@
 import { useMemo, useState } from 'react';
 import { useDispatch, TypedUseSelectorHook, useSelector } from 'react-redux';
-import moment from 'moment';
+import moment, { Moment } from 'moment';
 
-import { PRIORITY } from '../card/Card.props';
+import { CardProps, PRIORITY } from '../card/Card.props';
 import { updateTaskbyId } from '../../../store/slices/taskSlice';
 import { RootState } from '../../../store/store';
-// import { useForm } from '../../../hooks';
 import { closeModal } from '../../../store/slices';
 import { useForm } from '../../../hooks/useForm';
 
@@ -21,7 +20,7 @@ const formData = {
 
 const formValidations = {
 	time: [
-		(value: any) =>
+		(value: Moment) =>
 			value != null
 				? moment(value).format() != 'Invalid date'
 					? true
@@ -39,15 +38,15 @@ const formValidations = {
 };
 export function useEditTaskForm(id: string | undefined) {
 	const [formSubmitted, setFormSubmitted] = useState(false);
-	const isModalOpen = useSelector((state: any) => state.modal.isOpen);
+	const modal = useSelector((state: RootState) => state.modal);
 
 	const dispatch = useDispatch();
 	const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
-	const list = useAppSelector((state): any => state.task.tasksList);
+	const list = useAppSelector((state): CardProps[] => state.task.tasksList);
 
 	const initialFormData = useMemo(() => {
 		if (id) {
-			const taskById = list.find((task: any) => task.id === id);
+			const taskById = list.find((task: CardProps) => task.id === id);
 
 			return {
 				priority: taskById?.priority,
@@ -77,7 +76,9 @@ export function useEditTaskForm(id: string | undefined) {
 	const handleCloseModal = () => {
 		dispatch(closeModal({ modalName: 'editTask' }));
 	};
-	const onSubmit: (event: any) => void = event => {
+	const onSubmit: (
+		event: React.ChangeEvent<HTMLInputElement>
+	) => void = event => {
 		event.preventDefault();
 		setFormSubmitted(true);
 		if (!isFormValid) return;
@@ -106,7 +107,7 @@ export function useEditTaskForm(id: string | undefined) {
 		formState,
 		onInputChange,
 		onDataChange,
-		isModalOpen,
+		...modal,
 		handleCloseModal,
 	};
 }

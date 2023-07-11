@@ -24,17 +24,16 @@ export function SortableItem(props: TaskListProps) {
 
 	return (
 		<div ref={setNodeRef} style={style} {...attributes} {...listeners}>
-			<div onClick={handleOpenModal}>
-				<Card
-					key={id}
-					id={id}
-					title={title}
-					description={description}
-					priority={priority}
-					status={status}
-					time={time}
-				/>
-			</div>
+			<Card
+				key={id}
+				id={id}
+				title={title}
+				description={description}
+				priority={priority}
+				status={status}
+				time={time}
+				onClick={handleOpenModal}
+			/>
 		</div>
 	);
 }

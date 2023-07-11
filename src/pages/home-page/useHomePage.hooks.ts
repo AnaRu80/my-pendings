@@ -1,12 +1,13 @@
 import { useState, useMemo, useEffect } from 'react';
 import { TypedUseSelectorHook, useSelector } from 'react-redux';
+import { CardProps } from '../../components/organisms/card/Card.props';
 import type { RootState } from '../../store/store';
 
-export function useHomePage(activeTab: any) {
+export function useHomePage(activeTab: string) {
 	const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
 
-	const list = useAppSelector((state): any => state.task.tasksList);
-	const [tasks, setTasks] = useState<any>(list);
+	const list = useAppSelector((state): CardProps[] => state.task.tasksList);
+	const [tasks, setTasks] = useState<CardProps[]>(list);
 	useMemo(() => setTasks(list), [list]);
 
 	useEffect(() => {
@@ -17,11 +18,11 @@ export function useHomePage(activeTab: any) {
 				break;
 
 			case 'active':
-				tasksByTab = list.filter((task: any) => task.status == activeTab);
+				tasksByTab = list.filter((task: CardProps) => task.status == activeTab);
 				setTasks(tasksByTab);
 				break;
 			case 'completed':
-				tasksByTab = list.filter((task: any) => task.status == activeTab);
+				tasksByTab = list.filter((task: CardProps) => task.status == activeTab);
 				setTasks(tasksByTab);
 				break;
 

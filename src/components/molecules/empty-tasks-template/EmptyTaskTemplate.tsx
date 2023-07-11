@@ -1,6 +1,9 @@
 import { Text } from '../../atoms';
 
-export function EmptyTaskTemplate({ activeTab = '' }: any) {
+interface EmptyTaskTemplateProps {
+	activeTab: string;
+}
+export function EmptyTaskTemplate({ activeTab = '' }: EmptyTaskTemplateProps) {
 	const tab = activeTab === 'all' ? '' : activeTab;
 	return (
 		<Text

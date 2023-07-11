@@ -14,7 +14,7 @@ import { useCard } from './useCard';
 import { Text } from '../../atoms';
 
 export const Card = (todo: CardProps) => {
-	const { id, title, description, priority, time, status } = todo;
+	const { id, title, description, priority, time, status, onClick } = todo;
 	const {
 		expanded,
 		typographyRef,
@@ -30,10 +30,14 @@ export const Card = (todo: CardProps) => {
 			<CardContent>
 				<Grid container columnSpacing={2} alignItems="center">
 					<Grid item>
-						<Checkbox checked={isActive} onChange={handleChange} />
+						<Checkbox
+							checked={isActive}
+							sx={{ zIndex: 999 }}
+							onChange={handleChange}
+						/>
 					</Grid>
 					<Divider orientation="vertical" flexItem className={priority} />
-					<Grid item xs={7}>
+					<Grid item xs={7} onClick={onClick}>
 						<Text
 							text={title}
 							variant="h6"
