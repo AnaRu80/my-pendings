@@ -28,7 +28,7 @@ export const Card = (todo: CardProps) => {
 	return (
 		<CardMui sx={CardStyles}>
 			<CardContent>
-				<Grid container columnSpacing={2} alignItems="center">
+				<Grid container alignItems="center" justifyContent={'space-between'}>
 					<Grid item>
 						<Checkbox
 							checked={isActive}
