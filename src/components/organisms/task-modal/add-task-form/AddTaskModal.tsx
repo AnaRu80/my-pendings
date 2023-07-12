@@ -1,5 +1,5 @@
-import { Modal } from '../../molecules';
-import { AddTaskForm } from './AddTaskForm';
+import { Modal } from '../../../molecules';
+import { TaskForm } from '../TaskForm';
 import { useAddTaskForm } from './useAdTaskForm';
 
 export function AddTaskModal() {
@@ -14,7 +14,7 @@ export function AddTaskModal() {
 			secondaryButtonText="Close"
 			secondaryFunction={handleCloseModal}
 			disableMainButton={!formProps.isFormValid}>
-			<AddTaskForm {...formProps} />
+			<TaskForm {...formProps} />
 		</Modal>
 	);
 }
